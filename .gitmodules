@@ -1,0 +1,12 @@
+[submodule "external/cortex-a-rt"]
+	path = external/cortex-a-rt
+	url = https://github.com/arturkow2000/cortex-a-rt.git
+[submodule "external/generic-timer"]
+	path = external/generic-timer
+	url = https://github.com/arturkow2000/generic-timer.git
+[submodule "external/gicv2"]
+	path = external/gicv2
+	url = https://github.com/arturkow2000/gicv2.git
+[submodule "external/embassy"]
+	path = external/embassy
+	url = https://github.com/embassy-rs/embassy

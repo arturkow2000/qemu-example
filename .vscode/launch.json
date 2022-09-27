@@ -1,0 +1,27 @@
+{
+    // Użyj funkcji IntelliSense, aby uzyskać informacje o możliwych atrybutach.
+    // Najedź kursorem, aby wyświetlić opisy istniejących atrybutów.
+    // Aby uzyskać więcej informacji, odwiedź stronę: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "qemu-example",
+            "type": "lldb",
+            "request": "custom",
+            "targetCreateCommands": [
+                "target create qemu-system-arm",
+                "settings set target.disable-stdio true",
+                "process launch -- -M virt-4.2 -cpu cortex-a7 -nographic -s -S -m 128M -kernel ${workspaceFolder}/target/armv7a-none-eabi/debug/qemu-example -chardev socket,path=/tmp/qemu-example-uart0,id=uart0 -serial chardev:uart0",
+                "target create -p remote-gdb-server ${workspaceFolder}/target/armv7a-none-eabi/debug/qemu-example",
+            ],
+            "processCreateCommands": [
+                "gdb-remote 127.0.0.1:1234",
+                "b main",
+                "c"
+            ],
+            "sourceLanguages": [
+                "rust"
+            ],
+        }
+    ]
+}
