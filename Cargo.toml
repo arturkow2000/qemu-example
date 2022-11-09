@@ -13,13 +13,15 @@ static_cell = "1"
 critical-section = "1"
 defmt = "0.3"
 fdt = "0.1"
+linked_list_allocator = "0.10"
 
 [dependencies.cortex-a-rt]
 path = "external/cortex-a-rt"
 features = [
     "single-core-critical-section",
     "defmt",
-    "panic_handler"
+    "panic_handler",
+    "unwind",
 ]
 
 [dependencies.pl011]
@@ -48,3 +50,9 @@ features = ["nightly", "integrated-timers"]
 [dependencies.futures-util]
 version = "0.3"
 default-features = false
+
+[profile.dev]
+panic = "unwind"
+
+[patch.crates-io.gimli]
+path = "external/gimli"

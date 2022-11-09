@@ -1,6 +1,7 @@
 #![feature(panic_info_message)]
 #![feature(sync_unsafe_cell)]
 #![feature(type_alias_impl_trait)]
+#![feature(default_alloc_error_handler)]
 #![no_std]
 #![no_main]
 
@@ -8,6 +9,7 @@ use embassy_executor::raw::Executor;
 use fdt::Fdt;
 use static_cell::StaticCell;
 
+mod alloc;
 mod irq;
 mod kernel;
 mod uart;
@@ -20,6 +22,7 @@ fn main() -> ! {
 
     unsafe { uart::init(pl011_base.starting_address as usize) };
     defmt::info!("Hello");
+    alloc::init();
 
     defmt::debug!("Memory:");
     for region in fdt.memory().regions() {
